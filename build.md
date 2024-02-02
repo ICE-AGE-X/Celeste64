@@ -1,0 +1,1 @@
+dotnet publish -c Release -r win-x64 -p:ImportByWildcardBeforeSolution=false -o build && cp -r Content build

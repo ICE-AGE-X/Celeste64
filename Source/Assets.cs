@@ -122,46 +122,16 @@ public static class Assets
 		// load audio
 		Audio.Load(Path.Join(ContentPath, "Audio"));
 
-		Dictionary<int, int> temp = new Dictionary<int, int>();
-		for (int i = 32; i < 128; i++)
-		{
-			temp.Add(i,i);
-		}
-		
 		// load level json
 		{
 			var data = File.ReadAllText(Path.Join(ContentPath, "Levels.json"));
 			Levels = JsonSerializer.Deserialize(data, LevelInfoListContext.Default.ListLevelInfo) ?? [];
-			foreach (var item in Levels)
-			{
-				foreach (var chr in item.Name)
-				{
-					if (!temp.ContainsKey(chr))
-						temp.Add(chr, chr);
-				}
-				foreach (var chr in item.Label)
-				{
-					if (!temp.ContainsKey(chr))
-						temp.Add(chr, chr);
-				}
-			}
 		}
 
 		// load dialog json
 		{
 			var data = File.ReadAllText(Path.Join(ContentPath, "Dialog.json"));
 			Dialog = JsonSerializer.Deserialize(data, DialogLineDictContext.Default.DictionaryStringListDialogLine) ?? [];
-			foreach (var item in Dialog)
-			{
-				foreach (var line in item.Value)
-				{
-					foreach (var chr in line.Text)
-					{
-						if (!temp.ContainsKey(chr))
-							temp.Add(chr, chr);
-					}
-				}
-			}
 		}
 
 		// load glsl shaders
@@ -174,12 +144,22 @@ public static class Assets
 				Shaders[shader.Name] = shader;
 			}
 		}
-		var char2 = temp.Values.ToArray();
+		
+		List<int> char2 = new List<int>();
+		for (int i = 32; i < 128; i++)
+		{
+			char2.Add(i);
+		}
+
+		for (int i = 0x4e00; i < 0x9fbf; i++)
+		{
+			char2.Add(i);
+		}
 		// load font files
 		var fontsPath = Path.Join(ContentPath, "Fonts");
 		foreach (var file in Directory.EnumerateFiles(fontsPath, "*.*", SearchOption.AllDirectories))
 			if (file.EndsWith(".ttf") || file.EndsWith(".otf"))
-				Fonts.Add(GetResourceName(fontsPath, file), new SpriteFont(file, FontSize, char2));
+				Fonts.Add(GetResourceName(fontsPath, file), new SpriteFont(file, FontSize, char2.ToArray()));
 
 		// pack sprites into single texture
 		{

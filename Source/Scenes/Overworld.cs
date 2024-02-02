@@ -28,13 +28,13 @@ public class Overworld : Scene
 
 			if (Save.Instance.TryGetRecord(Level.ID) is {} record)
 			{
-				Menu.Add(new Menu.Option("Continue"));
-				Menu.Add(new Menu.Option("Restart"));
+				Menu.Add(new Menu.Option("继续"));
+				Menu.Add(new Menu.Option("重新开始"));
 				Complete = record.Strawberries.Count >= Level.Strawberries;
 			}
 			else
 			{
-				Menu.Add(new Menu.Option("Start"));
+				Menu.Add(new Menu.Option("开始"));
 			}
 		}
 
@@ -156,8 +156,8 @@ public class Overworld : Scene
 		]);
 		mesh.SetIndices<int>([0, 1, 2, 0, 2, 3]);
 
-		restartConfirmMenu.Add(new Menu.Option("Cancel"));
-		restartConfirmMenu.Add(new Menu.Option("Clear Save & Restart Level"));
+		restartConfirmMenu.Add(new Menu.Option("取消"));
+		restartConfirmMenu.Add(new Menu.Option("清除存档 & 重新开始关卡"));
 		restartConfirmMenu.UpSound = Sfx.main_menu_roll_up;
 		restartConfirmMenu.DownSound = Sfx.main_menu_roll_down;
 
@@ -377,12 +377,12 @@ public class Overworld : Scene
 			// button prompts
 			if (state != States.Entering)
 			{
-				var cancelPrompt = state == States.Selecting ? "Back" : "Cancel";
+				var cancelPrompt = state == States.Selecting ? "返回" : "取消";
 				var at = bounds.BottomRight + new Vec2(-16, -4) * Game.RelativeScale + new Vec2(0, -UI.PromptSize);
 				var width = 0.0f;
 				UI.Prompt(batch, Controls.Cancel, cancelPrompt, at, out width, 1.0f);
 				at.X -= width + 8 * Game.RelativeScale;
-				UI.Prompt(batch, Controls.Confirm, "Confirm", at, out _, 1.0f);
+				UI.Prompt(batch, Controls.Confirm, "确认", at, out _, 1.0f);
 
 				// show version number on Overworld as well
                 UI.Text(batch, Game.VersionString, bounds.BottomLeft + new Vec2(4, -4) * Game.RelativeScale, new Vec2(0, 1), Color.White * 0.25f);

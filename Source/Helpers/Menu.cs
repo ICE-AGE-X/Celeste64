@@ -60,8 +60,8 @@ public class Menu
 
 	public class Toggle(string label, Action action, Func<bool> get)  : Item
 	{
-		private readonly string labelOff = $"{label} : OFF";
-		private readonly string labelOn  = $"{label} :  ON";
+		private readonly string labelOff = $"{label} : 关";
+		private readonly string labelOn  = $"{label} :  开";
 		private readonly Action action = action;
         public override string Label => get() ? labelOn : labelOff;
         public override bool Pressed()

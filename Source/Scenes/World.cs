@@ -77,22 +77,22 @@ public class World : Scene
 
 		// setup pause menu
 		{
-			pauseMenu.Add(new Menu.Option("Resume", () => SetPaused(false)));
-			pauseMenu.Add(new Menu.Option("Retry", () =>
+			pauseMenu.Add(new Menu.Option("恢复", () => SetPaused(false)));
+			pauseMenu.Add(new Menu.Option("重试", () =>
 			{
 				SetPaused(false);
 				Audio.StopBus(Sfx.bus_dialog, false);
 				Get<Player>()?.Kill();
 			}));
 			pauseMenu.Add(new Menu.Spacer());
-			pauseMenu.Add(new Menu.Toggle("Fullscreen", Save.Instance.ToggleFullscreen, () => Save.Instance.Fullscreen));
+			pauseMenu.Add(new Menu.Toggle("全屏", Save.Instance.ToggleFullscreen, () => Save.Instance.Fullscreen));
 			pauseMenu.Add(new Menu.Toggle("Z-Guide", Save.Instance.ToggleZGuide, () => Save.Instance.ZGuide));
-			pauseMenu.Add(new Menu.Toggle("Timer", Save.Instance.ToggleTimer, () => Save.Instance.SpeedrunTimer));
+			pauseMenu.Add(new Menu.Toggle("计时器", Save.Instance.ToggleTimer, () => Save.Instance.SpeedrunTimer));
 			pauseMenu.Add(new Menu.Spacer());
-			pauseMenu.Add(new Menu.Slider("BGM", 0, 10, () => Save.Instance.MusicVolume, Save.Instance.SetMusicVolume));
-			pauseMenu.Add(new Menu.Slider("SFX", 0, 10, () => Save.Instance.SfxVolume, Save.Instance.SetSfxVolume));
+			pauseMenu.Add(new Menu.Slider("音乐", 0, 10, () => Save.Instance.MusicVolume, Save.Instance.SetMusicVolume));
+			pauseMenu.Add(new Menu.Slider("音效", 0, 10, () => Save.Instance.SfxVolume, Save.Instance.SetSfxVolume));
 			pauseMenu.Add(new Menu.Spacer());
-			pauseMenu.Add(new Menu.Option("Save & Quit", () => Game.Instance.Goto(new Transition()
+			pauseMenu.Add(new Menu.Option("保存 & 退出", () => Game.Instance.Goto(new Transition()
 			{
 				Mode = Transition.Modes.Replace,
 				Scene = () => new Overworld(true),
