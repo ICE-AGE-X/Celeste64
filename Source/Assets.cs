@@ -122,12 +122,12 @@ public static class Assets
 		// load audio
 		Audio.Load(Path.Join(ContentPath, "Audio"));
 
-		List<int> list = new List<int>();
+		Dictionary<int, int> temp = new Dictionary<int, int>();
 		for (int i = 32; i < 128; i++)
 		{
-			list.Add(i);
+			temp.Add(i,i);
 		}
-		Dictionary<int, int> temp = new Dictionary<int, int>();
+		
 		// load level json
 		{
 			var data = File.ReadAllText(Path.Join(ContentPath, "Levels.json"));
