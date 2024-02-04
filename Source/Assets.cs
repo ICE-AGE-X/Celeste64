@@ -146,11 +146,30 @@ public static class Assets
 		}
 		
 		List<int> char2 = new List<int>();
+		//ascii
 		for (int i = 32; i < 128; i++)
 		{
 			char2.Add(i);
 		}
-
+		//中文标点
+		for (int i = 0x2000; i < 0x20ff; i++)
+		{
+			char2.Add(i);
+		}
+		for (int i = 0x3000; i < 0x303f; i++)
+		{
+			char2.Add(i);
+		}
+		for (int i = 0xfe30; i < 0xfe4f; i++)
+		{
+			char2.Add(i);
+		}
+		//全角
+		for (int i = 0xff00; i < 0xffef; i++)
+		{
+			char2.Add(i);
+		}
+		//中文
 		for (int i = 0x4e00; i < 0x9fbf; i++)
 		{
 			char2.Add(i);
